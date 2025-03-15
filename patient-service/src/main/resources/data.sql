@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS patient (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Insert sample data if the table is empty
+-- Insert sample data if the table is not empty
 INSERT INTO patient (id, email, name, address, date_of_birth, registered_date, created_at, updated_at) VALUES
   (uuid_generate_v4(), 'john.doe@example.com', 'John Doe', '123 Main St, New York, NY', '1990-05-15', CURRENT_DATE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
   (uuid_generate_v4(), 'jane.smith@example.com', 'Jane Smith', '456 Elm St, Los Angeles, CA', '1985-08-22', CURRENT_DATE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
