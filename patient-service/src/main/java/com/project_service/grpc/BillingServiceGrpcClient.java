@@ -20,7 +20,7 @@ public class BillingServiceGrpcClient {
 
 
     public BillingServiceGrpcClient(
-            @Value("${billing.service.grpc.address:localhost}") String serverAddress,
+            @Value("${billing.service.address:localhost}") String serverAddress,
             @Value("${billing.service.grpc.port:9001}") int serverPort
     ) {
 

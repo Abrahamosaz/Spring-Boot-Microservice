@@ -25,12 +25,10 @@ import java.util.function.Function;
 public class JwtService {
 
     private final SecretKey secretKey;
-    private final UserService userService;
 
     public JwtService(@Value("${jwt.secret}") String secretKey, UserService userService){
         byte[] bytes = Base64.getDecoder().decode(secretKey.getBytes(StandardCharsets.UTF_8));
         this.secretKey = Keys.hmacShaKeyFor(bytes);
-        this.userService = userService;
     }
 
 
@@ -83,15 +81,8 @@ public class JwtService {
                 .build().parseSignedClaims(token).getPayload();
     }
 
-    public boolean validateToken(String token) {
-        try {
-            // extract all claims  from the token
-            String email = this.extractUserEmail(token);
-            User user = userService.findUserByEmail(email).orElse(null);
-            return user != null && !isTokenExpired(token);
-        } catch (JwtException ex) {
-            throw new JwtException("Invalid token");
-        }
+    public boolean validateToken(String token, User user) {
+        return user != null && !isTokenExpired(token);
     }
 
     private boolean isTokenExpired(String token) {

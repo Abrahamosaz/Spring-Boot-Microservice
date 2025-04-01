@@ -56,7 +56,9 @@ public class AuthService {
 
     public boolean validateToken(String accessToken) {
         try {
-            return jwtService.validateToken(accessToken);
+            String email = jwtService.extractUserEmail(accessToken);
+            User user = userService.findUserByEmail(email).orElse(null);
+            return jwtService.validateToken(accessToken, user);
         } catch (JwtException ex) {
             return false;
         }

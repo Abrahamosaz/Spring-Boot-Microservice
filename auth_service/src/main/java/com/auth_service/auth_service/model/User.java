@@ -5,6 +5,7 @@ import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -30,8 +31,9 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    @Column(nullable = false, columnDefinition = "VARCHAR(10) DEFAULT 'USER'")
-    private String role = "USER";
+    @Column(nullable = false, length = 10)
+    @ColumnDefault("'USER'")
+    private String role;
 
     private LocalDateTime createdAt;
 

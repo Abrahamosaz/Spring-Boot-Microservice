@@ -28,6 +28,7 @@ spring:
             - Path=/api/patients/**
           filters:
             - StripPrefix=1
+            - JwtValidation
 
         - id: api-doc-patient-service-route
           uri: http://patient-service:4000
@@ -35,6 +36,4 @@ spring:
             - Path=/api-docs/patients
           filters:
             - RewritePath=/api-docs/patients, /api-docs
-
-
 
